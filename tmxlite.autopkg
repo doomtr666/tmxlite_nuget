@@ -1,0 +1,62 @@
+configurations {
+  Toolset {
+    key : "PlatformToolset";
+      choices: { v141, v140 };
+    };
+}
+
+nuget {
+
+  nuspec {
+    id = tmxlite_native;
+    version : 1.0.1;
+    title:  "tmxlite for VS2015+";
+    authors: {  Matt Marchant };
+    licenseUrl: "https://www.zlib.net/zlib_license.html";
+    projectUrl: "https://github.com/fallahn/tmxlite";
+    requireLicenseAcceptance:false;
+    summary: "A lightweight C++14 parsing library for tmx map files created with the Tiled map editor.";
+	  copyright: "Copyright (c) Matt Marchant";
+    description: "tmxlite for VS2015+";
+    releaseNotes: "First package version.";
+    tags: { native };
+  };
+ 
+  files {
+
+    i1: {
+      #destination = ${d_include}\tmxlite;
+      "tmxlite\tmxlite\include\tmxlite\*"
+    };
+
+    i2: {
+      #destination = ${d_include}\tmxlite\detail;
+      "tmxlite\tmxlite\include\tmxlite\detail\*"
+    };
+
+    [x86,release] {
+      lib: { "build32\Release\tmxlite.lib" };
+      bin: { "build32\Release\tmxlite.dll" };
+    };
+ 
+    [x86,debug] {
+      lib: { "build32\Debug\tmxlite-d.lib" };
+      bin: { "build32\Debug\tmxlite-d.dll" };
+    };
+
+    [x64,release] {
+      lib: { "build64\Release\tmxlite.lib" };
+      bin: { "build64\Release\tmxlite.dll" };
+    };
+ 
+    [x64,debug] {
+      lib: { "build64\Debug\tmxlite-d.lib" };
+      bin: { "build64\Debug\tmxlite-d.dll" };
+    };
+
+  };
+
+  targets {
+    Defines += HAS_TMXLITE;
+  };
+}
